@@ -29,12 +29,6 @@ class SessionsController < ApplicationController
     end
 
     def route_user(user)
-      if user.type == 'Admin'
-        redirect_to admin_path(user)
-      elsif user.type == 'Teacher'
-        redirect_to teacher_path(user)
-      elsif user.type == 'Student'
-        redirect_to student_path(user)
-      end
+      redirect_to root_path
     end
 end
