@@ -20,6 +20,7 @@ gem 'bootstrap_form'
 group :development, :test do
   gem 'pry-byebug'
   gem 'faker'
+  gem 'rspec-rails', '~> 3.5'
 end
 
 group :development do
