@@ -7,8 +7,7 @@ class User < ActiveRecord::Base
   validates :email,
     uniqueness: true
 
-  validates :password,
-    length: { minimum: 6, message: "must have a minimum of 6 characters"}
+  validates_length_of :password, minimum: 6, on: :create
 
   validates :password_confirmation,
     presence: true
