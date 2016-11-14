@@ -1,0 +1,17 @@
+<%= bootstrap_form_for @user, url: join_path do |f| %>
+  <%= f.text_field :first_name %>
+  <%= f.text_field :last_name %>
+  <%= f.text_field :email %>
+  <%= f.password_field :password, help: "Must be 6 Characters", icon: "lock" %>
+  <%= f.password_field :password_confirmation, label: "Confirm Password" %>
+
+  </div>  <div class="row">
+    <div class="col-xs-3">
+      <%= f.submit "Join Gradebook", class: "btn btn-success" %>
+    </div>
+    <div class="col-xs-4">
+      <%= link_to sanitize("Already registered? <br> Log in here."),
+          login_path %>
+    </div>
+  </div>
+<% end %>
