@@ -18,9 +18,16 @@ gem 'bootstrap_form'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
   gem 'pry-byebug'
   gem 'faker'
   gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
+  gem "shoulda-matchers", ">= 3.0.0",
+    require: false
+  gem 'database_cleaner'
+  gem 'better_errors'
 end
 
 group :development do
