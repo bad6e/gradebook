@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
   resources :users, only: [:create]
-  resources :admins, controller: 'admins', type: 'Admin'
-  resources :teachers, controller: 'teachers', type: 'Teacher'
-  resources :students, controller: 'students', type: 'Student'
+  resources :admins, controller: 'admins', type: 'Admin', only: [:show]
+  resources :teachers, controller: 'teachers', type: 'Teacher', only: [:show]
+  resources :students, controller: 'students', type: 'Student', only: [:show]
+
+  namespace :api do
+    namespace :v1 do
+      resources :admins, controller: 'admins', type: 'Admin', only: [:show]
+      resources :teachers, controller: 'teachers', type: 'Teacher', only: [:show]
+      resources :students, controller: 'students', type: 'Student', only: [:show]
+    end
+  end
 
   root "welcome#index"
 
