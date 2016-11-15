@@ -4,4 +4,42 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include SessionsHelper
+
+  private
+
+    def set_type
+      @type = type
+    end
+
+    def type
+      params[:type]
+    end
+
+    def set_user_type
+      @user = type_class.find(params[:id])
+    end
+
+    def type_class
+      type.constantize
+    end
+
+    def list_of_user_types
+      {"current_student?" => current_student?,
+       "current_teacher?" => current_teacher?,
+       "current_admin?" => current_admin?}
+    end
+
+    def require_admin(required_user)
+      render file: "/public/403" unless list_of_user_types[required_user]
+    end
+
+    def route_user(user)
+      if user.type == 'Admin'
+        redirect_to admin_path(user)
+      elsif user.type == 'Teacher'
+        redirect_to teacher_path(user)
+      elsif user.type == 'Student'
+        redirect_to student_path(user)
+      end
+    end
 end
