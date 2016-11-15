@@ -30,3 +30,9 @@ student  = Student.create!({email: "student@gmail.com",
                             first_name: "Frodo",
                             last_name: "Bagins"
                            })
+
+3.times do
+  Semester.create!({begin_date: Date.today,
+                    end_date: Date.today + 3.months
+                  })
+end
