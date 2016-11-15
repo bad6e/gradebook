@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  root 'users#index'
+  resources :users, only: [:create]
+  resources :admins, controller: 'admins', type: 'Admin'
+  resources :teachers, controller: 'teachers', type: 'Teacher'
+  resources :students, controller: 'students', type: 'Student'
+
+  root "welcome#index"
 
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"

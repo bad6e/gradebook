@@ -25,10 +25,7 @@ class SessionsController < ApplicationController
   private
 
     def user_params
-      params.require(:login).permit(:email, :password)
-    end
-
-    def route_user(user)
-      redirect_to root_path
+      params.require(:login).permit(:email,
+                                    :password)
     end
 end

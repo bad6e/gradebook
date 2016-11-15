@@ -18,4 +18,22 @@ module SessionsHelper
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
+
+  def current_admin?
+    current_user && current_user.type == 'Admin'
+  end
+
+  def current_teacher?
+    current_user && current_user.type == 'Teacher'
+  end
+
+  def current_student?
+    current_user && current_user.type == 'Student'
+  end
+
+  def verify_user_in_params_matches_current_user
+    if params.except(:id).empty? || current_user.id != params[:id].to_i
+      render file: "/public/403"
+    end
+  end
 end
