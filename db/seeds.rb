@@ -36,3 +36,11 @@ student  = Student.create!({email: "student@gmail.com",
                     end_date: Date.today + 3.months
                   })
 end
+
+10.times do
+  Course.create!({name: Faker::Company.catch_phrase,
+                  description: Faker::Company.bs,
+                  teacher_id: Teacher.limit(1).order("RANDOM()").first.id,
+                  semester_id: Semester.limit(1).order("RANDOM()").first.id
+                })
+end
