@@ -13,9 +13,7 @@
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <li>
-            <a href="/profile">
-              <%= "Welcome, #{current_user.first_name}." %>
-            </a>
+            <%= link_to "Welcome, #{current_user.first_name}" %>
           </li>
           <li>
             <%= link_to "Logout", logout_path, method: :delete %>

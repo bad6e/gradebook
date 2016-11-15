@@ -4,7 +4,8 @@
   <%= f.text_field :email %>
   <%= f.password_field :password, help: "Must be 6 Characters", icon: "lock" %>
   <%= f.password_field :password_confirmation, label: "Confirm Password" %>
-
+  <%= f.label :type %>
+  <%= select(:user, :type, User.types.map{ |r| r }) %>
   </div>  <div class="row">
     <div class="col-xs-3">
       <%= f.submit "Join Gradebook", class: "btn btn-success" %>
