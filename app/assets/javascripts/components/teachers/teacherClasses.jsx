@@ -16,7 +16,7 @@ var TeacherClasses = React.createClass({
         const semesterList = this.findPossibleSemesters(classes);
         this.setState({
           classes: classes,
-          semester: classes[0].semester.beginDate,
+          semester: classes[0].semester.semesterName,
           semesterList: semesterList
         });
       }.bind(this),
@@ -29,7 +29,7 @@ var TeacherClasses = React.createClass({
   findPossibleSemesters: function(classes) {
     const possibleSemesters = classes.reduce(function(acc, teacherClass) {
       const semester = teacherClass.semester.id
-      acc[teacherClass.semester.beginDate] = teacherClass.semester.endDate
+      acc[teacherClass.semester.semesterName] = teacherClass.semester.endDate
       return acc
     }, {})
     return possibleSemesters
@@ -46,7 +46,7 @@ var TeacherClasses = React.createClass({
 
   semesterSelect: function(teacherClass) {
     const semesterId = this.state.semester;
-    return teacherClass.semester.beginDate === semesterId
+    return teacherClass.semester.semesterName === semesterId
   },
 
   renderSemesters: function(semester) {
