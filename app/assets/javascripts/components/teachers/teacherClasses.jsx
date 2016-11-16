@@ -1,7 +1,10 @@
 var TeacherClasses = React.createClass({
   getInitialState: function () {
     return {
-      classes: []
+      classes: [],
+      semester: '',
+      semesterList: [],
+      selectSemester: ''
     };
   },
 
@@ -10,8 +13,11 @@ var TeacherClasses = React.createClass({
       url: this.props.url,
       dataType: 'json',
       success: function (classes) {
+        const semesterList = this.findPossibleSemesters(classes);
         this.setState({
-          classes: classes
+          classes: classes,
+          semester: classes[0].semester.beginDate,
+          semesterList: semesterList
         });
       }.bind(this),
       error: function (xhr, status, err) {
@@ -20,17 +26,49 @@ var TeacherClasses = React.createClass({
     });
   },
 
+  findPossibleSemesters: function(classes) {
+    const possibleSemesters = classes.reduce(function(acc, teacherClass) {
+      const semester = teacherClass.semester.id
+      acc[teacherClass.semester.beginDate] = teacherClass.semester.endDate
+      return acc
+    }, {})
+    return possibleSemesters
+  },
+
   renderClasses: function(teacherClass) {
-    return <TeacherClass key= {teacherClass.id}
-                         name= {teacherClass.name}
-                         id=  {teacherClass.id}
+    return <TeacherClass key={teacherClass.id}
+                         name={teacherClass.name}
+                         description={teacherClass.description}
+                         id={teacherClass.id}
+                         students={teacherClass.studentCourses}
            />
+  },
+
+  semesterSelect: function(teacherClass) {
+    const semesterId = this.state.semester;
+    return teacherClass.semester.beginDate === semesterId
+  },
+
+  renderSemesters: function(semester) {
+    return (
+      <option key={semester} value={semester}>{semester}</option>
+    )
+  },
+
+  handleChange(e) {
+    this.setState({semester: e.target.value});
   },
 
   render: function() {
     return (
       <div>
-        {this.state.classes.map(this.renderClasses)}
+        <h5>Please select a semester</h5>
+        <select value={this.state.semester} onChange={this.handleChange}>
+          {Object.keys(this.state.semesterList).map(this.renderSemesters)}
+        </select>
+        <div className="semester-selector">
+          {this.state.classes.filter(this.semesterSelect).map(this.renderClasses)}
+        </div>
       </div>
     );
   }

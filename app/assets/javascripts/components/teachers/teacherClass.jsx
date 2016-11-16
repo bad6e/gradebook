@@ -1,15 +1,19 @@
 var TeacherClass = React.createClass({
   render: function() {
-    const { name, id } = this.props;
+    const { id, name, description, students } = this.props;
     return (
       <div className="dropdown classes">
-        <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-          Class Name: <strong>{name} </strong>
+        <a href="#" data-toggle="dropdown" className="dropdown-toggle">Class Name: <strong>{name} </strong>
           <span className="caret"></span>
-        </button>
+        </a>
+
         <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Action</a></li>
+          <li>Description: {description}</li><br/>
+          <h5>Students</h5>
+          <TeacherClassStudents
+            key={id}
+            students={students}
+          />
         </ul>
       </div>
     );
