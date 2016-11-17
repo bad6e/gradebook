@@ -2,6 +2,9 @@ class Semester < ActiveRecord::Base
   validates :begin_date, :end_date,
     presence: true
 
+  validates :begin_date, :end_date,
+    uniqueness: true
+
   validate :verify_end_date_is_after_begin_date
 
   def verify_end_date_is_after_begin_date

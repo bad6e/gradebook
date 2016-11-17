@@ -4,10 +4,10 @@ if User.exists?(1)
 end
 
 admin    = Admin.create!({email: "admin@gmail.com",
-                         password: "12345678",
-                         password_confirmation: "12345678",
-                         first_name: "Principal",
-                         last_name: "Larry"
+                          password: "12345678",
+                          password_confirmation: "12345678",
+                          first_name: "Principal",
+                          last_name: "Larry"
                         })
 
 teacher  = Teacher.create!({email: "teacher@gmail.com",
@@ -31,16 +31,33 @@ student  = Student.create!({email: "student@gmail.com",
                             last_name: "Bagins"
                            })
 
-3.times do
-  Semester.create!({begin_date: Date.today,
-                    end_date: Date.today + 3.months
+60.times do
+  Student.create!({email: (0...8).map { (65 + rand(26)).chr }.join + "@gmail.com",
+                   password: "12345678",
+                   password_confirmation: "12345678",
+                   first_name: Faker::Name.first_name,
+                   last_name: Faker::Name.last_name
                   })
 end
 
-10.times do
+month_count = 15
+5.times do
+  Semester.create!({begin_date: Date.today - month_count.months,
+                    end_date: Date.today - ((month_count - 3).months)
+                  })
+  month_count = month_count - 3
+end
+
+15.times do
   Course.create!({name: Faker::Company.catch_phrase,
                   description: Faker::Company.bs,
                   teacher_id: Teacher.limit(1).order("RANDOM()").first.id,
                   semester_id: Semester.limit(1).order("RANDOM()").first.id
                 })
+end
+
+Student.all.each do |s|
+  StudentCourse.create!(student_id: s.id,
+                        course_id: Course.limit(1).order("RANDOM()").first.id,
+                        grade: [0,1,2,3,4].sample)
 end
