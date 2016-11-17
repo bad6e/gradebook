@@ -15,7 +15,7 @@ class Api::V1::TeachersController < ApplicationController
     end
 
     def verify_user_in_params_matches_current_user
-      if teacher_params.except(:id).empty? || current_user.id != teacher_params[:id].to_i
+      if current_user.id != teacher_params[:id].to_i
          render status: 401, json: {
           error: "Teachers can only see their own classes"
         }
