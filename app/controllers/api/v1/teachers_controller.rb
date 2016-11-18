@@ -1,11 +1,10 @@
 class Api::V1::TeachersController < ApplicationController
   respond_to :json
-
   before_action :verify_user_in_params_matches_current_user, only: [:show]
 
   def show
-    courses = Teacher.find(params[:id]).courses
-    respond_with courses
+    @teacher = Teacher.preload(:courses).find(teacher_params[:id])
+    respond_with @teacher.courses, each_serializer: Api::V1::Teachers::CourseSerializer
   end
 
   private
