@@ -13,6 +13,7 @@ gem 'bootstrap_form'
 gem 'react-rails'
 gem 'responders'
 gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
+gem 'lodash-rails'
 
 group :development, :test do
   gem 'capybara'

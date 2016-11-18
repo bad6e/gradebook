@@ -108,6 +108,8 @@ GEM
     json (1.8.3)
     jsonapi (0.1.1.beta2)
       json (~> 1.8)
+    lodash-rails (4.15.0)
+      railties (>= 3.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -243,6 +245,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   jquery-rails
+  lodash-rails
   pg (~> 0.15)
   pry-byebug
   rails (= 4.2.6)

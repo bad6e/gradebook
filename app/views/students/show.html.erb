@@ -5,3 +5,8 @@
   </div>
 </div>
 
+<div class="container">
+  <div class="col-md-12">
+    <%= react_component('Courses', url: "/api/v1/students/#{@user.id}", type: "Student")%>
+  </div>
+</div>
