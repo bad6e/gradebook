@@ -1,7 +1,8 @@
-var TeacherClassStudents = React.createClass({
+var Students = React.createClass({
   renderStudents: function(student) {
+    const std = student.students;
     return (
-      <li><a href="#">{student.studentName.fullName} | Grade: {student.grade}</a></li>
+      <li>{std.fullName} | Grade: {std.grade}</li>
     )
   },
 

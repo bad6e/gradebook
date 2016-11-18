@@ -1,6 +1,6 @@
-var TeacherClass = React.createClass({
+var CourseDescription = React.createClass({
   render: function() {
-    const { id, name, description, students } = this.props;
+    const { id, name, description, studentsOfCourse } = this.props;
     return (
       <div className="dropdown classes">
         <a href="#" data-toggle="dropdown" className="dropdown-toggle">Class Name: <strong>{name} </strong>
@@ -10,9 +10,9 @@ var TeacherClass = React.createClass({
         <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
           <li>Description: {description}</li><br/>
           <h5>Students</h5>
-          <TeacherClassStudents
+          <Students
             key={id}
-            students={students}
+            students={studentsOfCourse}
           />
         </ul>
       </div>
