@@ -16,10 +16,6 @@ class User < ActiveRecord::Base
   validates :password_confirmation,
     presence: true
 
-  scope :admins, -> { where(type: 'Admin') }
-  scope :teachers, -> { where(type: 'Teacher') }
-  scope :students, -> { where(type: 'Student') }
-
   def full_name
     "#{first_name} #{last_name}"
   end
