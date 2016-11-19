@@ -70,10 +70,10 @@ RSpec.describe Api::V1::TeachersController, type: :controller do
     end
 
     context "when current_user does not match user in params" do
-      let!(:student)  { create(:student) }
+      let!(:teacher)  { create(:teacher) }
 
       before do
-        login(student)
+        login(teacher)
         get :show, id: 20000, type: 'Teacher',format: :json
       end
 
