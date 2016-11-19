@@ -7,12 +7,12 @@
 
 <div class="container">
   <div class="col-md-12">
-    <%= react_component('CourseList', url: "/api/v1/courses")%>
+    <%= react_component('CourseList', url: "/api/v1/courses", user: "#{current_user.id}")%>
   </div>
 </div>
 
 <div class="container">
   <div class="col-md-12">
-    <%= react_component('SemesterList', url: "/api/v1/semesters")%>
+    <%= react_component('SemesterList', url: "/api/v1/semesters", user: "#{current_user.id}")%>
   </div>
 </div>
