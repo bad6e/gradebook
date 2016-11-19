@@ -8,7 +8,7 @@ var AverageGrade = React.createClass({
   componentDidMount: function() {
     if (this.props.id) {
       $.ajax({
-        url: `/api/v1/admins/${this.props.user}/grades/${this.props.id}`,
+        url: `/api/v1/admins/${this.props.user}/courses/${this.props.id}`,
         dataType: 'json',
         success: function (grades) {
           this.setState({
