@@ -14,14 +14,6 @@ class Api::V1::StudentsController < ApplicationController
       params.permit(:id)
     end
 
-    def verify_current_user
-      if !current_user
-        render status: 401, json: {
-          error: "Must login for information."
-        }
-      end
-    end
-
     def verify_user_in_params_matches_current_user
       if current_user.id != student_params[:id].to_i
          render status: 401, json: {
