@@ -19,5 +19,6 @@ describe Semester do
   it "must have an end_date after the begin_date" do
     semester = Semester.create(begin_date: Date.today, end_date: Date.today - 3.months)
     expect(semester).to be_invalid
+    expect(semester.errors[:base]).to eq(["Semester begin date must be before end date"])
   end
 end
