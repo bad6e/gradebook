@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+      resources :courses, only: [:index]
       resources :admins, controller: 'admins', type: 'Admin', only: [:show]
       resources :teachers, controller: 'teachers', type: 'Teacher', only: [:show]
       resources :students, controller: 'students', type: 'Student', only: [:show]
