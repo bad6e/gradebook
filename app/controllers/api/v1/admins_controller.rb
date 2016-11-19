@@ -15,8 +15,8 @@ class Api::V1::AdminsController < ApplicationController
 
     def verify_user_in_params_matches_current_user
       if current_user.id != admin_params[:id].to_i
-         render status: 401, json: {
-          error: "Students can only see their own schedule and grades."
+        render status: 401, json: {
+          error: "Admins only."
         }
       end
     end
