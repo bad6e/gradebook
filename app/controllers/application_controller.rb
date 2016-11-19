@@ -42,4 +42,12 @@ class ApplicationController < ActionController::Base
         redirect_to student_path(user)
       end
     end
+
+     def verify_current_user
+      if !current_user
+        render status: 401, json: {
+          error: "Must login for information."
+        }
+      end
+    end
 end
