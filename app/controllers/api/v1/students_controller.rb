@@ -1,5 +1,6 @@
 class Api::V1::StudentsController < ApplicationController
   respond_to :json
+  before_action :verify_current_user, only: [:show]
   before_action :verify_user_in_params_matches_current_user, only: [:show]
 
   def show
@@ -11,6 +12,14 @@ class Api::V1::StudentsController < ApplicationController
 
     def student_params
       params.permit(:id)
+    end
+
+    def verify_current_user
+      if !current_user
+        render status: 401, json: {
+          error: "Must login for information."
+        }
+      end
     end
 
     def verify_user_in_params_matches_current_user
