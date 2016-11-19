@@ -41,6 +41,7 @@ var CourseList = React.createClass({
         </select>
         <AverageGrade key={this.state.selectedCourse}
                       id={this.state.selectedCourse}
+                      user={this.props.user}
         />
       </div>
     );
