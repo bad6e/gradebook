@@ -5,6 +5,6 @@ class Course < ActiveRecord::Base
   has_many :student_courses
   has_many :students, through: :student_courses
 
-  validates :name, :description,
+  validates :name, :description, :teacher_id, :semester_id,
     presence: true
 end
