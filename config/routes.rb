@@ -6,7 +6,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :admins, controller: 'admins', type: 'Admin', only: [:show]
+      resources :courses, only: [:index]
+      resources :semesters, only: [:index]
+      get 'admins/:id/grades/:id', to: 'admins#grades'
+      get 'admins/:id/semesters/:id', to: 'admins#enrollment_counts'
       resources :teachers, controller: 'teachers', type: 'Teacher', only: [:show]
       resources :students, controller: 'students', type: 'Student', only: [:show]
     end

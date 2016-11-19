@@ -61,10 +61,10 @@ var Courses = React.createClass({
 
   calculateSemesterGrade: function(allCourses) {
     const totalGrade = _.reduce(allCourses, function(sum, n) {
-      return sum + n.studentCourses[0].students.grade;
+      return sum + n.studentCourses[0].students.grade/allCourses.length;
     }, 0);
     return (
-      `Semester Grade: ${totalGrade/allCourses.length}`
+      `Semester Grade: ${(totalGrade).toFixed(2)}`
     )
   },
 
