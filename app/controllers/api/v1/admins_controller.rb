@@ -1,8 +1,9 @@
 class Api::V1::AdminsController < ApplicationController
   respond_to :json
-  # before_action :verify_user_in_params_matches_current_user, only: [:show]
+  before_action :verify_current_user, only: [:all_course_grades, :enrollment_counts]
+  before_action :verify_user_in_params_matches_current_user, only: [:all_course_grades, :enrollment_counts]
 
-  def grades
+  def all_course_grades
     @grade = Course.preload(:student_courses).find(admin_params[:id])
     respond_with @grade.student_courses.pluck(:grade)
   end
@@ -15,11 +16,12 @@ class Api::V1::AdminsController < ApplicationController
   private
 
     def admin_params
-      params.permit(:id)
+      params.permit(:id,
+                    :admin_id)
     end
 
     def verify_user_in_params_matches_current_user
-      if current_user.id != admin_params[:id].to_i
+      if current_user.id != admin_params[:admin_id].to_i
         render status: 401, json: {
           error: "Admins only."
         }
