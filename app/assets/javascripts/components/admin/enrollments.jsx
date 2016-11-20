@@ -23,7 +23,6 @@ var Enrollments = React.createClass({
   },
 
   renderCourses: function(course) {
-    debugger;
     return (
       <li key={course.id}>{course.name}: {course.students.length} Student(s)</li>
     )
