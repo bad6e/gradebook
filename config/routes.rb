@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :courses, only: [:index]
       resources :semesters, only: [:index]
-      get 'admins/:id/courses/:id', to: 'admins#all_course_grades'
-      get 'admins/:id/semesters/:id', to: 'admins#enrollment_counts'
+      get 'admins/:admin_id/courses/:id', to: 'admins#all_course_grades'
+      get 'admins/:admin_id/semesters/:id', to: 'admins#enrollment_counts'
       resources :teachers, controller: 'teachers', type: 'Teacher', only: [:show]
       resources :students, controller: 'students', type: 'Student', only: [:show]
     end
