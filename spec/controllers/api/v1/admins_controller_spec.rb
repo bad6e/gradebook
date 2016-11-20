@@ -48,7 +48,7 @@ RSpec.describe Api::V1::AdminsController, type: :controller do
 
     context "when there is no current_user" do
       before do
-        get :all_course_grades, id: 2, type: 'Admin',format: :json
+        get :all_course_grades, admin_id: 2, id: 1, type: 'Admin',format: :json
       end
 
       it "renders a json error" do
@@ -61,7 +61,7 @@ RSpec.describe Api::V1::AdminsController, type: :controller do
 
       before do
         login(student)
-        get :all_course_grades, id: 20000, type: 'Admin',format: :json
+        get :all_course_grades, admin_id: 2000, id: 1, type: 'Admin',format: :json
       end
 
       it "renders a json error" do
@@ -132,7 +132,7 @@ RSpec.describe Api::V1::AdminsController, type: :controller do
 
     context "when there is no current_user" do
       before do
-        get :enrollment_counts, id: 2, type: 'Admin',format: :json
+        get :enrollment_counts, admin_id: 2, id: 1, type: 'Admin',format: :json
       end
 
       it "renders a json error" do
@@ -145,7 +145,7 @@ RSpec.describe Api::V1::AdminsController, type: :controller do
 
       before do
         login(admin)
-        get :enrollment_counts, id: 20000, type: 'Admin',format: :json
+        get :enrollment_counts, admin_id: 2000, id: 1, type: 'Admin',format: :json
       end
 
       it "renders a json error" do
