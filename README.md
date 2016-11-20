@@ -6,19 +6,19 @@ We anticipate this exercise taking candidates 4 - 6 hours to complete and submit
 
 To get started, just clone this repository.
 
-`rake db:create db:migrate db:seed`
+```rake db:create db:migrate db:seed```
 
 To login as a teacher:
 
-`teacher@gmail.com Pass: 12345678`
+```teacher@gmail.com Pass: 12345678```
 
 To login as a student:
 
-`student@gmail.com Pass: 12345678`
+```student@gmail.com Pass: 12345678```
 
 To login as a admin:
 
-`admin@gmail.com Pass: 12345678`
+```admin@gmail.com Pass: 12345678```
 
 ## Exercise
 
