@@ -5,7 +5,7 @@ class Api::V1::TeachersController < ApplicationController
 
   def show
     @teacher = Teacher.preload(:courses).find(teacher_params[:id])
-    respond_with @teacher.courses, each_serializer: Api::V1::Teachers::CourseSerializer
+    respond_with @teacher.courses.order(:id), each_serializer: Api::V1::Teachers::CourseSerializer
   end
 
   private

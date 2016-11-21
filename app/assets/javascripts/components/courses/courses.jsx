@@ -76,7 +76,7 @@ var Courses = React.createClass({
     return (
       <div>
         <h5>Please select a semester</h5>
-        <select value={this.state.selectedSemester} onChange={this.handleChange}>
+        <select name="semesters-select" value={this.state.selectedSemester} onChange={this.handleChange}>
           {Object.keys(this.state.semesterList).map(this.renderSemesters)}
         </select>
         <div className="semester-selector">

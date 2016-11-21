@@ -1,9 +1,10 @@
 require "rails_helper"
 
-feature "Admin can see statistics" do
-  given!(:admin)     { create(:admin) }
-  given!(:teacher)   { create(:teacher) }
+feature "Teacher can see statistics" do
+  given!(:teacher1)   { create(:teacher) }
+  given!(:teacher2)   { create(:teacher) }
   given!(:semester1) { create(:semester) }
+  given!(:semester2) { create(:semester) }
   given!(:semester2) { create(:semester) }
   given!(:student1)  { create(:student) }
   given!(:student2)  { create(:student) }
@@ -14,15 +15,15 @@ feature "Admin can see statistics" do
 
   given!(:course1)  { create(:course,
                              semester_id: semester1.id,
-                             teacher_id: teacher.id) }
+                             teacher_id: teacher1.id) }
 
   given!(:course2)  { create(:course,
-                             semester_id: semester1.id,
-                             teacher_id: teacher.id) }
+                             semester_id: semester2.id,
+                             teacher_id: teacher1.id) }
 
   given!(:course3)  { create(:course,
-                             semester_id: semester2.id,
-                             teacher_id: teacher.id) }
+                             semester_id: semester1.id,
+                             teacher_id: teacher2.id) }
 
   given!(:student_course1) { create(:student_course,
                                      student_id: student1.id,
@@ -55,40 +56,48 @@ feature "Admin can see statistics" do
                                      grade: 2.0) }
 
 
-  scenario "admin can see average course grade", js: true do
-    log_in_as(admin)
+  scenario "teacher can semester list - select a semester - and see all their classes", js: true do
+    log_in_as(teacher1)
 
-    within(".course-list") do
-      select(course1.name, from: "course-select")
+    within(".teacher-semester-list") do
+      select("#{semester1.begin_date} to #{semester1.end_date}", from: "semesters-select")
       expect(page).to have_content(course1.name)
-      expect(page).to have_content(1.5)
 
-      select(course2.name, from: "course-select")
+      select("#{semester2.begin_date} to #{semester2.end_date}", from: "semesters-select")
       expect(page).to have_content(course2.name)
-      expect(page).to have_content(3.5)
-
-      select(course3.name, from: "course-select")
-      expect(page).to have_content(course3.name)
-      expect(page).to have_content(1.0)
     end
   end
 
 
   scenario "admin can all semesters, the courses for that semester, and the number of students in those courses", js: true do
-    log_in_as(admin)
+    log_in_as(teacher1)
 
-    within(".semester-list") do
-      select("#{semester1.begin_date} to #{semester1.end_date}", from: "semester-select")
-      expect(page).to have_content("#{semester1.begin_date} to #{semester1.end_date}")
-      expect(page).to have_content(course1.name)
-      expect(page).to have_content(course1.students.count)
-      expect(page).to have_content(course2.name)
-      expect(page).to have_content(course2.students.count)
+    within(".teacher-semester-list") do
+      select("#{semester1.begin_date} to #{semester1.end_date}", from: "semesters-select")
 
-      select("#{semester2.begin_date} to #{semester2.end_date}", from: "semester-select")
-      expect(page).to have_content("#{semester2.begin_date} to #{semester2.end_date}")
-      expect(page).to have_content(course3.name)
-      expect(page).to have_content(course3.students.count)
+      click_on(course1.name)
+
+      expect(page).to have_content(student1.full_name)
+      expect(page).to have_content(student2.full_name)
+
+      student_1_grade = StudentCourse.where(student_id: student1.id, course_id: course1.id).first
+      expect(page).to have_content(student_1_grade.grade)
+
+      student_2_grade = StudentCourse.where(student_id: student2.id, course_id: course1.id).first
+      expect(page).to have_content(student_2_grade.grade)
+
+      select("#{semester2.begin_date} to #{semester2.end_date}", from: "semesters-select")
+
+      click_on(course2.name)
+
+      expect(page).to have_content(student3.full_name)
+      expect(page).to have_content(student4.full_name)
+
+      student_3_grade = StudentCourse.where(student_id: student3.id, course_id: course2.id).first
+      expect(page).to have_content(student_3_grade.grade)
+
+      student_4_grade = StudentCourse.where(student_id: student4.id, course_id: course2.id).first
+      expect(page).to have_content(student_4_grade.grade)
     end
   end
 end

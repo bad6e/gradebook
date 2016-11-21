@@ -10,7 +10,7 @@ class Api::V1::AdminsController < ApplicationController
 
   def enrollment_counts
     @semester = Semester.preload(:courses).find(admin_params[:id])
-    respond_with @semester.courses, each_serializer: Api::V1::Admins::CourseSerializer
+    respond_with @semester.courses.order(:id), each_serializer: Api::V1::Admins::CourseSerializer
   end
 
   private
