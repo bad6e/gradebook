@@ -55,7 +55,7 @@ feature "Admin can see statistics" do
                                      grade: 2.0) }
 
 
-  scenario "admin can see average course grade", js: true do
+  scenario "admin can select a course and see the average course grade for that course", js: true do
     log_in_as(admin)
 
     within(".course-list") do
@@ -74,7 +74,7 @@ feature "Admin can see statistics" do
   end
 
 
-  scenario "admin can all semesters, the courses for that semester, and the number of students in those courses", js: true do
+  scenario "admin select any semester and see the courses for that semester, and the number of students in each of those courses", js: true do
     log_in_as(admin)
 
     within(".semester-list") do
