@@ -36,7 +36,7 @@ var CourseList = React.createClass({
     return (
       <div>
         <h5>Please select acourse for average course grade:</h5>
-        <select value={this.state.selectedCourse} onChange={this.handleChange}>
+        <select name="course-select" value={this.state.selectedCourse} onChange={this.handleChange}>
           {this.state.courses.map(this.renderCourses)}
         </select>
         <AverageGrade key={this.state.selectedCourse}
