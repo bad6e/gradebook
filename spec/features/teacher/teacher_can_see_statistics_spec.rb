@@ -56,7 +56,7 @@ feature "Teacher can see statistics" do
                                      grade: 2.0) }
 
 
-  scenario "teacher can semester list - select a semester - and see all their classes", js: true do
+  scenario "teacher can see semester list - select a semester - and see all their courses for that semester", js: true do
     log_in_as(teacher1)
 
     within(".teacher-semester-list") do
@@ -69,7 +69,7 @@ feature "Teacher can see statistics" do
   end
 
 
-  scenario "admin can all semesters, the courses for that semester, and the number of students in those courses", js: true do
+  scenario "From a selected course - a teacher can see all the students in that course and their respective grades", js: true do
     log_in_as(teacher1)
 
     within(".teacher-semester-list") do
