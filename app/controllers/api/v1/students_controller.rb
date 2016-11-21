@@ -5,7 +5,7 @@ class Api::V1::StudentsController < ApplicationController
 
   def show
     @student = Student.preload(:courses).find(student_params[:id])
-    respond_with @student.courses, each_serializer: Api::V1::Students::CourseSerializer, current_user: current_user
+    respond_with @student.courses.order(:id), each_serializer: Api::V1::Students::CourseSerializer, current_user: current_user
   end
 
   private
