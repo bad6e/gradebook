@@ -1,4 +1,4 @@
-var Courses = React.createClass({
+var SemestersCourses = React.createClass({
   getInitialState: function () {
     return {
       courses: [],
