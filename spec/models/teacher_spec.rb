@@ -23,8 +23,8 @@ describe User do
   it { should have_many(:courses) }
 
   it do
-    should validate_length_of(:password).
-    is_at_least(6).
-      on(:create)
+    should validate_length_of(:password)
+      .is_at_least(6)
+      .on(:create)
   end
 end

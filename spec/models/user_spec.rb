@@ -21,8 +21,8 @@ describe User do
   it { should validate_uniqueness_of(:email) }
 
   it do
-    should validate_length_of(:password).
-    is_at_least(6).
-      on(:create)
+    should validate_length_of(:password)
+      .is_at_least(6)
+      .on(:create)
   end
 end
