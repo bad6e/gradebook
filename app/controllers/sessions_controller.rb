@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :only_render_if_no_current_user, only: [:new]
+
   def new
   end
 

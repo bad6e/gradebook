@@ -36,6 +36,12 @@ class ApplicationController < ActionController::Base
       render file: '/public/403' unless list_of_user_types[type]
     end
 
+    def only_render_if_no_current_user
+      if current_user
+        redirect_to root_path
+      end
+    end
+
     def verify_current_user
       unless current_user
         render status: 401, json: {
