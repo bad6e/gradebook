@@ -1,8 +1,8 @@
 var CourseList = React.createClass({
   getInitialState: function () {
     return {
-    courses: [],
-    selectedCourse: ''
+      courses: [],
+      selectedCourse: ''
     };
   },
 
