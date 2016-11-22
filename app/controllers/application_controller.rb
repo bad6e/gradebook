@@ -26,14 +26,14 @@ class ApplicationController < ActionController::Base
 
     def list_of_user_types
       {
-        'current_student?' => current_student?,
-        'current_teacher?' => current_teacher?,
-        'current_admin?' => current_admin?
+        'student?' => student?,
+        'teacher?' => teacher?,
+        'admin?' => admin?
       }
     end
 
-    def require_admin(required_user)
-      render file: '/public/403' unless list_of_user_types[required_user]
+    def require_user_type(type)
+      render file: '/public/403' unless list_of_user_types[type]
     end
 
     def verify_current_user
