@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: user_params[:email])
     if valid(user)
       log_in(user)
-      route_user(user.type, user)
+      route_user(user)
     else
       flash.now[:errors] = 'Invalid Login'
       render :new
