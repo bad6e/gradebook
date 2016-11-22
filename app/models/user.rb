@@ -19,4 +19,16 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def admin?
+    type == 'Admin'
+  end
+
+  def teacher?
+    type == 'Teacher'
+  end
+
+  def student?
+    type == 'Student'
+  end
 end
