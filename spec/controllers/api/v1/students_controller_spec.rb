@@ -47,7 +47,8 @@ RSpec.describe Api::V1::StudentsController, type: :controller do
         expect(response_data[0].dig(:semester, :id)).to eq(semester.id)
       end
 
-      it 'returns the students full name and grade' do
+      it 'returns the students id, full name, grade' do
+        expect(response_data[0].dig(:studentCourses)[0].dig(:students, :id)).to eq(student.id)
         expect(response_data[0].dig(:studentCourses)[0].dig(:students, :grade)).to eq(student_course1.grade)
         expect(response_data[0].dig(:studentCourses)[0].dig(:students, :fullName)).to eq(student.full_name)
       end
