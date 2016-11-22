@@ -37,6 +37,16 @@ module SessionsHelper
     end
   end
 
+  def render_path(current_user)
+    if current_user.type == 'Admin'
+      admin_path(current_user)
+    elsif current_user.type == 'Teacher'
+      teacher_path(current_user)
+    elsif current_user.type == 'Student'
+      student_path(current_user)
+    end
+  end
+
   def route_user(user)
     if user.type == 'Admin'
       redirect_to admin_path(user)
