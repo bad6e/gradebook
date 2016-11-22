@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      route_user(@user)
+      route_user(@user.type, @user)
     else
       flash.now[:errors] = @user.errors.full_messages.join(', ')
       render :new

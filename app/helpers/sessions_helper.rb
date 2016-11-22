@@ -41,13 +41,7 @@ module SessionsHelper
     eval("#{type.downcase}_path(current_user)")
   end
 
-  def route_user(user)
-    if user.type == 'Admin'
-      redirect_to admin_path(user)
-    elsif user.type == 'Teacher'
-      redirect_to teacher_path(user)
-    elsif user.type == 'Student'
-      redirect_to student_path(user)
-    end
+  def route_user(type, user)
+    redirect_to eval("#{type.downcase}_path(user)")
   end
 end
