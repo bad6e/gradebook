@@ -6,15 +6,15 @@ class User < ActiveRecord::Base
   end
 
   validates :first_name, :last_name, :email,
-    presence: true
+            presence: true
 
   validates :email,
-    uniqueness: true
+            uniqueness: true
 
   validates_length_of :password, minimum: 6, on: :create
 
   validates :password_confirmation,
-    presence: true
+            presence: true
 
   def full_name
     "#{first_name} #{last_name}"

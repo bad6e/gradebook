@@ -15,6 +15,7 @@ gem 'responders'
 gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
 gem 'lodash-rails'
 gem 'faker'
+gem 'rubocop'
 
 group :development, :test do
   gem 'capybara'

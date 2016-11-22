@@ -16,6 +16,6 @@ describe Course do
   it { should belong_to(:semester) }
   it { should belong_to(:teacher) }
 
-  it { should have_many(:student_courses)}
-  it { should have_many(:students)}
+  it { should have_many(:student_courses) }
+  it { should have_many(:students) }
 end

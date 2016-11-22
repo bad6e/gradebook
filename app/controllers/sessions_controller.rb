@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       log_in(user)
       route_user(user)
     else
-      flash.now[:errors] = "Invalid Login"
+      flash.now[:errors] = 'Invalid Login'
       render :new
     end
   end

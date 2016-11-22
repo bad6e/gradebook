@@ -33,7 +33,17 @@ module SessionsHelper
 
   def verify_user_in_params_matches_current_user
     if params.except(:id).empty? || current_user.id != params[:id].to_i
-      render file: "/public/403"
+      render file: '/public/403'
+    end
+  end
+
+  def route_user(user)
+    if user.type == 'Admin'
+      redirect_to admin_path(user)
+    elsif user.type == 'Teacher'
+      redirect_to teacher_path(user)
+    elsif user.type == 'Student'
+      redirect_to student_path(user)
     end
   end
 end

@@ -23,7 +23,7 @@ class Api::V1::AdminsController < ApplicationController
     def verify_user_in_params_matches_current_user
       if current_user.id != admin_params[:admin_id].to_i
         render status: 401, json: {
-          error: "Admins only."
+          error: 'Admins only.'
         }
       end
     end
