@@ -45,6 +45,8 @@ RSpec.describe Api::V1::AdminsController, type: :controller do
         get :all_course_grades, admin_id: current_user.id, id: course.id, type: 'Admin', format: :json
       end
 
+      it { should respond_with 200 }
+
       it 'returns all the grades for a given course' do
         expect(response_data.length).to eq(4)
         expect(response_data).to eq([1.0, 2.0, 3.0, 4.0])
@@ -56,21 +58,41 @@ RSpec.describe Api::V1::AdminsController, type: :controller do
         get :all_course_grades, admin_id: 2, id: 1, type: 'Admin', format: :json
       end
 
+      it { should respond_with 401 }
+
       it 'renders a json error' do
         expect(response_data[:error]).to eq('Must login for information.')
       end
     end
 
-    context 'when current_user does not match user in params' do
+    context 'when current_user type is NOT admin' do
       let!(:student) { create(:student) }
 
       before do
         login(student)
-        get :all_course_grades, admin_id: 2000, id: 1, type: 'Admin', format: :json
+        get :all_course_grades, admin_id: student.id, id: 1, type: 'Admin', format: :json
       end
 
+      it { should respond_with 401 }
+
       it 'renders a json error' do
-        expect(response_data[:error]).to eq('Admins only.')
+        expect(response_data[:error]).to eq('Admins Only.')
+      end
+    end
+
+    context 'when current_user does not match user in params' do
+      let!(:admin1) { create(:admin) }
+      let!(:admin2) { create(:admin) }
+
+      before do
+        login(admin1)
+        get :all_course_grades, admin_id: admin2.id, id: 1, type: 'Admin', format: :json
+      end
+
+      it { should respond_with 401 }
+
+      it 'renders a json error' do
+        expect(response_data[:error]).to eq('Admins can only see their own information.')
       end
     end
   end
@@ -124,6 +146,8 @@ RSpec.describe Api::V1::AdminsController, type: :controller do
         get :enrollment_counts, admin_id: current_user.id, id: semester.id, type: 'Admin', format: :json
       end
 
+      it { should respond_with 200 }
+
       it 'returns all the courses that belong to that semester' do
         expect(response_data.length).to eq(2)
       end
@@ -146,21 +170,41 @@ RSpec.describe Api::V1::AdminsController, type: :controller do
         get :enrollment_counts, admin_id: 2, id: 1, type: 'Admin', format: :json
       end
 
+      it { should respond_with 401 }
+
       it 'renders a json error' do
         expect(response_data[:error]).to eq('Must login for information.')
       end
     end
 
-    context 'when current_user does not match user in params' do
-      let!(:admin) { create(:admin) }
+    context 'when current_user type is NOT admin' do
+      let!(:student) { create(:student) }
 
       before do
-        login(admin)
-        get :enrollment_counts, admin_id: 2000, id: 1, type: 'Admin', format: :json
+        login(student)
+        get :enrollment_counts, admin_id: student.id, id: 1, type: 'Admin', format: :json
       end
 
+      it { should respond_with 401 }
+
       it 'renders a json error' do
-        expect(response_data[:error]).to eq('Admins only.')
+        expect(response_data[:error]).to eq('Admins Only.')
+      end
+    end
+
+    context 'when current_user does not match user in params' do
+      let!(:admin1) { create(:admin) }
+      let!(:admin2) { create(:admin) }
+
+      before do
+        login(admin1)
+        get :enrollment_counts, admin_id: admin2.id, id: 1, type: 'Admin', format: :json
+      end
+
+      it { should respond_with 401 }
+
+      it 'renders a json error' do
+        expect(response_data[:error]).to eq('Admins can only see their own information.')
       end
     end
   end

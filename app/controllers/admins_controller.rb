@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action -> { require_admin('current_admin?') }
+  before_action -> { require_user_type('admin?') }
   before_action :verify_user_in_params_matches_current_user
   before_action :set_type
   before_action :set_user_type, only: [:show]

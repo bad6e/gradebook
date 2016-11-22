@@ -42,6 +42,8 @@ RSpec.describe Api::V1::TeachersController, type: :controller do
         get :show, id: current_user.id, type: 'Teacher', format: :json
       end
 
+      it { should respond_with 200 }
+
       it 'returns all the courses that the teacher teaches' do
         expect(response_data.length).to eq(2)
       end
@@ -72,18 +74,38 @@ RSpec.describe Api::V1::TeachersController, type: :controller do
         get :show, id: 2, type: 'Teacher', format: :json
       end
 
+      it { should respond_with 401 }
+
       it 'renders a json error' do
         expect(response_data[:error]).to eq('Must login for information.')
       end
     end
 
-    context 'when current_user does not match user in params' do
-      let!(:teacher) { create(:teacher) }
+    context 'when current_user type is NOT teacher' do
+      let!(:student) { create(:student) }
 
       before do
-        login(teacher)
-        get :show, id: 200_000, type: 'Teacher', format: :json
+        login(student)
+        get :show, id: student.id, type: 'Teacher', format: :json
       end
+
+      it { should respond_with 401 }
+
+      it 'renders a json error' do
+        expect(response_data[:error]).to eq('Teachers Only.')
+      end
+    end
+
+    context 'when current_user does not match user in params' do
+      let!(:teacher1) { create(:teacher) }
+      let!(:teacher2) { create(:teacher) }
+
+      before do
+        login(teacher1)
+        get :show, id: teacher2.id, type: 'Teacher', format: :json
+      end
+
+      it { should respond_with 401 }
 
       it 'renders a json error' do
         expect(response_data[:error]).to eq('Teachers can only see their own classes.')
