@@ -10,7 +10,8 @@ feature 'Student can see statistics' do
 
   given!(:course1) { create(:course,
                             semester_id: semester1.id,
-                            teacher_id: teacher.id) }
+                            teacher_id: teacher.id)
+  }
 
   given!(:course2) { create(:course,
                             semester_id: semester1.id,
