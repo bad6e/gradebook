@@ -33,7 +33,7 @@ module SessionsHelper
 
   def verify_user_in_params_matches_current_user
     if params.except(:id).empty? || current_user.id != params[:id].to_i
-      render file: "/public/403"
+      render file: '/public/403'
     end
   end
 

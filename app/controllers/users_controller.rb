@@ -9,12 +9,13 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       route_user(@user)
     else
-      flash.now[:errors] = @user.errors.full_messages.join(", ")
+      flash.now[:errors] = @user.errors.full_messages.join(', ')
       render :new
     end
   end
 
   private
+
     def user_params
       params.require(:user).permit(:first_name,
                                    :last_name,
@@ -22,5 +23,5 @@ class UsersController < ApplicationController
                                    :type,
                                    :password,
                                    :password_confirmation)
-  end
+    end
 end

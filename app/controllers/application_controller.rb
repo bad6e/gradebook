@@ -25,19 +25,21 @@ class ApplicationController < ActionController::Base
     end
 
     def list_of_user_types
-      {"current_student?" => current_student?,
-       "current_teacher?" => current_teacher?,
-       "current_admin?" => current_admin?}
+      {
+        'current_student?' => current_student?,
+        'current_teacher?' => current_teacher?,
+        'current_admin?' => current_admin?
+      }
     end
 
     def require_admin(required_user)
-      render file: "/public/403" unless list_of_user_types[required_user]
+      render file: '/public/403' unless list_of_user_types[required_user]
     end
 
     def verify_current_user
-      if !current_user
+      unless current_user
         render status: 401, json: {
-          error: "Must login for information."
+          error: 'Must login for information.'
         }
       end
     end

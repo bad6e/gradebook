@@ -3,7 +3,7 @@ class Api::V1::Students::StudentSerializer < ActiveModel::Serializer
   attribute :full_name, if: :current_user_present?
 
   def current_user_present?
-    @instance_options && @instance_options[:current_user] && @instance_options[:current_user].id === object.id
+    @instance_options && @instance_options[:current_user] && @instance_options[:current_user].id == object.id
   end
 
   def full_name

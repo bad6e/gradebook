@@ -1,3 +1,17 @@
 # Configuration
 LineLength:
   Max: 135
+
+# Exclude certain files
+ClassAndModuleChildren:
+  Exclude:
+    - db/seeds.rb
+
+Documentation:
+  Enabled: false
+
+ClassAndModuleChildren:
+  Enabled: false
+
+GuardClause:
+  Enabled: false
