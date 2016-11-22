@@ -40,8 +40,8 @@ var SemesterList = React.createClass({
           {this.state.semesters.map(this.renderSemesters)}
         </select>
         <Enrollments key={this.state.selectedSemester}
-                      id={this.state.selectedSemester}
-                      user={this.props.user}
+                     id={this.state.selectedSemester}
+                     user={this.props.user}
         />
       </div>
     );

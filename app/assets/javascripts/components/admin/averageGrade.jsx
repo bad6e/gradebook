@@ -12,7 +12,7 @@ var AverageGrade = React.createClass({
         dataType: 'json',
         success: function (grades) {
           this.setState({
-            averageGrades: grades,
+            averageGrades: grades
           });
         }.bind(this),
         error: function (xhr, status, err) {
@@ -26,7 +26,7 @@ var AverageGrade = React.createClass({
     const avgGrade = _.reduce(grades, function(sum, n) {
       return sum + n/grades.length;
     }, 0);
-    return avgGrade
+    return avgGrade;
   },
 
   render: function() {
