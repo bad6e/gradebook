@@ -19,15 +19,15 @@ module SessionsHelper
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  def current_admin?
+  def admin?
     current_user && current_user.type == 'Admin'
   end
 
-  def current_teacher?
+  def teacher?
     current_user && current_user.type == 'Teacher'
   end
 
-  def current_student?
+  def student?
     current_user && current_user.type == 'Student'
   end
 
