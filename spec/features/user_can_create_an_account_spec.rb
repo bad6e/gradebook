@@ -53,4 +53,31 @@ feature 'guest creates an account' do
     expect(page).to have_content("Email can't be blank")
     expect(page).to have_content("Password confirmation can't be blank")
   end
+
+  scenario 'once a user joins - they cannot vist the join path while logged in', js: true do
+    visit join_path
+
+    fill_in 'user[first_name]', with: 'Mickey'
+    fill_in 'user[last_name]', with: 'Mouse'
+    fill_in 'user[email]', with: 'mickey@disney.com'
+    fill_in 'user[password]', with: 'mickey123'
+    fill_in 'user[password_confirmation]', with: 'mickey123'
+    select('Admin', from: 'user[type]')
+    click_on 'Join Gradebook'
+
+    user = User.find_by(email: 'mickey@disney.com')
+
+    expect(current_path).to eq(admin_path(user.id))
+
+    visit join_path
+
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content(user.full_name)
+
+    click_on('Click Here for Profile')
+
+    within('.user-name') do
+      expect(page).to have_content(user.full_name)
+    end
+  end
 end

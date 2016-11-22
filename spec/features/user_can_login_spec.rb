@@ -76,4 +76,30 @@ feature 'Can log in as a registered user' do
     click_link 'Already registered? Log in here.'
     expect(current_path).to eq(login_path)
   end
+
+  scenario 'once a user logs in - they cannot vist the login path while logged in' do
+    visit root_path
+
+    within('.login-buttons') do
+      click_on 'Click Here to Login'
+    end
+    expect(current_path).to eq(login_path)
+
+    fill_in 'login[email]', with: user.email
+    fill_in 'login[password]', with: user.password
+    click_button 'Login'
+
+    expect(current_path).to eq(admin_path(user.id))
+
+    visit login_path
+
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content(user.full_name)
+
+    click_on('Click Here for Profile')
+
+    within('.user-name') do
+      expect(page).to have_content(user.full_name)
+    end
+  end
 end
